@@ -89,14 +89,13 @@ func _physics_process(delta):
 	camera_x.y = 0
 	camera_x = camera_x.normalized()
 
-	var current_aim = Input.is_action_pressed("aim")
-
-	if aiming != current_aim:
-		aiming = current_aim
+	if Input.is_action_just_pressed("aim"):
 		if aiming:
-			camera_animation.play("shoot")
+			camera_animation.play("far");
+			aiming = false;
 		else:
-			camera_animation.play("far")
+			camera_animation.play("shoot");
+			aiming = true;
 
 	# Jump/in-air logic.
 	airborne_time += delta
